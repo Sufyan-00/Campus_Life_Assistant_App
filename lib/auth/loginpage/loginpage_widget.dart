@@ -405,7 +405,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: const Color(0xFF0016FF),
+                            color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
@@ -415,7 +415,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                 ),
                             elevation: 3.0,
                             borderSide: const BorderSide(
-                              color: Colors.black,
+                              color: Colors.transparent,
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(12.0),
@@ -432,7 +432,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                           onPressed: () async {
                             context.pushNamed('signuppage');
                           },
-                          text: 'New User? Sign up',
+                          text: 'New User? Sign Up',
                           options: FFButtonOptions(
                             width: 230.0,
                             height: 52.0,
@@ -440,20 +440,18 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
+                                .titleSmall
                                 .override(
-                                  fontFamily: 'Inter',
-                                  color: const Color(0xFFF7F7F7),
+                                  fontFamily: 'Inter Tight',
+                                  color: Colors.white,
                                   letterSpacing: 0.0,
                                 ),
-                            elevation: 0.0,
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              width: 2.0,
+                            elevation: 3.0,
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(12.0),
                           ),

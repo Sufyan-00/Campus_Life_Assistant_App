@@ -602,27 +602,26 @@ class _SignuppageWidgetState extends State<SignuppageWidget>
                           onPressed: () async {
                             context.pushNamed('loginpage');
                           },
-                          text: 'Already user? Sign in ',
+                          text: 'Already a User? Sign In',
                           options: FFButtonOptions(
                             width: 230.0,
-                            height: 44.0,
+                            height: 52.0,
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
+                                .titleSmall
                                 .override(
-                                  fontFamily: 'Inter',
+                                  fontFamily: 'Inter Tight',
                                   color: Colors.white,
                                   letterSpacing: 0.0,
                                 ),
-                            elevation: 0.0,
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              width: 2.0,
+                            elevation: 3.0,
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(12.0),
                           ),

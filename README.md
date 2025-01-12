@@ -1,6 +1,5 @@
 # Campus-life-assistant
 
-
 ## Sufyan Abdullah (SP22-BSE-025)
 
 **Home Page**
@@ -22,4 +21,3 @@
 **Class Schedule page**
 
 <img width="320" height="640" alt="chrome_lwUK3CKjeb" src="https://github.com/user-attachments/assets/421ee80c-6e59-41ac-a646-e2784c256461" />
-

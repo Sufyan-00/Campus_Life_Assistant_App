@@ -47,7 +47,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
             children: [
               Container(
                 width: double.infinity,
-                height: 240.0,
+                height: 196.0,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -68,6 +68,20 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed('Homepage');
+                        },
+                        child: Icon(
+                          Icons.logout_rounded,
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          size: 24.0,
+                        ),
+                      ),
                       Text(
                         'Welcome back,',
                         style:

@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'classschedule_widget.dart' show ClassscheduleWidget;
+import 'addclass_widget.dart' show AddclassWidget;
 import 'package:flutter/material.dart';
 
-class ClassscheduleModel extends FlutterFlowModel<ClassscheduleWidget> {
+class AddclassModel extends FlutterFlowModel<AddclassWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for setclassname widget.

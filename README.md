@@ -1,5 +1,7 @@
 # Campus-life-assistant
 
+A new Flutter project.
 
-## Sufyan Abdullah (SP22-BSE-025)
+## Getting Started
 
+FlutterFlow projects are built to run on the Flutter _stable_ release.

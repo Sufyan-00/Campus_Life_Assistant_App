@@ -3,4 +3,7 @@ export '/auth/loginpage/loginpage_widget.dart' show LoginpageWidget;
 export '/auth/signuppage/signuppage_widget.dart' show SignuppageWidget;
 export '/homepage/homepage_widget.dart' show HomepageWidget;
 export '/dashboard/dashboard_widget.dart' show DashboardWidget;
-export '/classschedule/classschedule_widget.dart' show ClassscheduleWidget;
+export '/class/classschedule/classschedule_widget.dart'
+    show ClassscheduleWidget;
+export '/class/addclass/addclass_widget.dart' show AddclassWidget;
+export '/class/edit_class/edit_class_widget.dart' show EditClassWidget;

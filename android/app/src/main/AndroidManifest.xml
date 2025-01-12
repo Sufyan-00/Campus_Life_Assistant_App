@@ -5,7 +5,7 @@
 
 
     <application
-        android:label="Campus-life-assistant"
+        android:label="Campus Life Assistant"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">

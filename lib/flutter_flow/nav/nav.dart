@@ -108,6 +108,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'classschedule',
           path: '/classschedule',
           builder: (context, params) => const ClassscheduleWidget(),
+        ),
+        FFRoute(
+          name: 'addclass',
+          path: '/addclass',
+          builder: (context, params) => const AddclassWidget(),
+        ),
+        FFRoute(
+          name: 'EditClass',
+          path: '/editClass',
+          builder: (context, params) => EditClassWidget(
+            className: params.getParam(
+              'className',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

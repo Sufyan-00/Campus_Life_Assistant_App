@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import '/auth/base_auth_user_provider.dart';
@@ -75,18 +76,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const HomePageWidget() : const LoginpageWidget(),
+          appStateNotifier.loggedIn ? const DashboardWidget() : const HomepageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const HomePageWidget() : const LoginpageWidget(),
-        ),
-        FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
+              appStateNotifier.loggedIn ? const DashboardWidget() : const HomepageWidget(),
         ),
         FFRoute(
           name: 'loginpage',
@@ -97,6 +93,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'signuppage',
           path: '/signuppage',
           builder: (context, params) => const SignuppageWidget(),
+        ),
+        FFRoute(
+          name: 'Homepage',
+          path: '/homepage',
+          builder: (context, params) => const HomepageWidget(),
+        ),
+        FFRoute(
+          name: 'Dashboard',
+          path: '/dashboard',
+          builder: (context, params) => const DashboardWidget(),
+        ),
+        FFRoute(
+          name: 'classschedule',
+          path: '/classschedule',
+          builder: (context, params) => const ClassscheduleWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -267,7 +278,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/loginpage';
+            return '/homepage';
           }
           return null;
         },
@@ -285,10 +296,9 @@ class FFRoute {
                   child: SizedBox(
                     width: 50.0,
                     height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
+                    child: SpinKitCircle(
+                      color: FlutterFlowTheme.of(context).primary,
+                      size: 50.0,
                     ),
                   ),
                 )

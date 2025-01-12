@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 class SignuppageModel extends FlutterFlowModel<SignuppageWidget> {
   ///  State fields for stateful widgets in this page.
 
+  // State field(s) for signup-name widget.
+  FocusNode? signupNameFocusNode;
+  TextEditingController? signupNameTextController;
+  String? Function(BuildContext, String?)? signupNameTextControllerValidator;
   // State field(s) for signup-emailAddress widget.
   FocusNode? signupEmailAddressFocusNode;
   TextEditingController? signupEmailAddressTextController;
@@ -31,6 +35,9 @@ class SignuppageModel extends FlutterFlowModel<SignuppageWidget> {
 
   @override
   void dispose() {
+    signupNameFocusNode?.dispose();
+    signupNameTextController?.dispose();
+
     signupEmailAddressFocusNode?.dispose();
     signupEmailAddressTextController?.dispose();
 

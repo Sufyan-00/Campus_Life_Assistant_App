@@ -29,6 +29,9 @@ class _SignuppageWidgetState extends State<SignuppageWidget>
     super.initState();
     _model = createModel(context, () => SignuppageModel());
 
+    _model.signupNameTextController ??= TextEditingController();
+    _model.signupNameFocusNode ??= FocusNode();
+
     _model.signupEmailAddressTextController ??= TextEditingController();
     _model.signupEmailAddressFocusNode ??= FocusNode();
 
@@ -215,7 +218,7 @@ class _SignuppageWidgetState extends State<SignuppageWidget>
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                       child: Text(
-                        'Use the account below to sign in.',
+                        'Create new account to Sign in.',
                         style:
                             FlutterFlowTheme.of(context).labelMedium.override(
                                   fontFamily: 'Inter',
@@ -236,6 +239,69 @@ class _SignuppageWidgetState extends State<SignuppageWidget>
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: TextFormField(
+                          controller: _model.signupNameTextController,
+                          focusNode: _model.signupNameFocusNode,
+                          autofocus: true,
+                          autofillHints: const [AutofillHints.email],
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: 'Name',
+                            labelStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  letterSpacing: 0.0,
+                                ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            filled: true,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            contentPadding: const EdgeInsets.all(24.0),
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                          keyboardType: TextInputType.emailAddress,
+                          validator: _model.signupNameTextControllerValidator
+                              .asValidator(context),
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
@@ -390,7 +456,7 @@ class _SignuppageWidgetState extends State<SignuppageWidget>
                           autofillHints: const [AutofillHints.password],
                           obscureText: !_model.conSignupPasswordVisibility,
                           decoration: InputDecoration(
-                            labelText: 'Password',
+                            labelText: 'Confirm Password',
                             labelStyle: FlutterFlowTheme.of(context)
                                 .labelMedium
                                 .override(
@@ -489,10 +555,11 @@ class _SignuppageWidgetState extends State<SignuppageWidget>
                             await UserRecord.collection
                                 .doc(user.uid)
                                 .update(createUserRecordData(
-                                  email: _model
-                                      .signupEmailAddressTextController.text,
+                                  email: _model.signupNameTextController.text,
                                   password:
                                       _model.signupPasswordTextController.text,
+                                  displayName:
+                                      _model.signupNameTextController.text,
                                 ));
 
                             await Future.delayed(
@@ -535,7 +602,7 @@ class _SignuppageWidgetState extends State<SignuppageWidget>
                           onPressed: () async {
                             context.pushNamed('loginpage');
                           },
-                          text: 'Already user? Login ',
+                          text: 'Already user? Sign in ',
                           options: FFButtonOptions(
                             width: 230.0,
                             height: 44.0,
@@ -543,14 +610,12 @@ class _SignuppageWidgetState extends State<SignuppageWidget>
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            color: FlutterFlowTheme.of(context).primary,
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
+                                  color: Colors.white,
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 0.0,

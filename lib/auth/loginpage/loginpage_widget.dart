@@ -395,7 +395,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                             await Future.delayed(
                                 const Duration(milliseconds: 1000));
 
-                            context.pushNamedAuth('HomePage', context.mounted);
+                            context.pushNamedAuth('Dashboard', context.mounted);
                           },
                           text: 'Sign In',
                           options: FFButtonOptions(
@@ -405,7 +405,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
+                            color: const Color(0xFF0016FF),
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
@@ -415,7 +415,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                 ),
                             elevation: 3.0,
                             borderSide: const BorderSide(
-                              color: Colors.transparent,
+                              color: Colors.black,
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(12.0),
@@ -435,7 +435,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                           text: 'New User? Sign up',
                           options: FFButtonOptions(
                             width: 230.0,
-                            height: 44.0,
+                            height: 52.0,
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
@@ -446,8 +446,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
+                                  color: const Color(0xFFF7F7F7),
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 0.0,

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1079305847499",
+    "project_id": "campus-life-assistant-km75h9",
+    "storage_bucket": "campus-life-assistant-km75h9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079305847499:android:713cd213ff7be133fcd14e",
+        "android_client_info": {
+          "package_name": "com.mycompany.campuslifeassistant"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvfPCzN7qxD-528qL8zfzD6koLoCmistc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

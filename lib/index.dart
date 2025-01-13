@@ -7,3 +7,9 @@ export '/class/classschedule/classschedule_widget.dart'
     show ClassscheduleWidget;
 export '/class/addclass/addclass_widget.dart' show AddclassWidget;
 export '/class/edit_class/edit_class_widget.dart' show EditClassWidget;
+export '/assignment/assignmenttracker/assignmenttracker_widget.dart'
+    show AssignmenttrackerWidget;
+export '/assignment/addassignment/addassignment_widget.dart'
+    show AddassignmentWidget;
+export '/assignment/editassignment/editassignment_widget.dart'
+    show EditassignmentWidget;

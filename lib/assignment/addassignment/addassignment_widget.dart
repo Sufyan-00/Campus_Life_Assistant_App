@@ -6,25 +6,25 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'addclass_model.dart';
-export 'addclass_model.dart';
+import 'addassignment_model.dart';
+export 'addassignment_model.dart';
 
-class AddclassWidget extends StatefulWidget {
-  const AddclassWidget({super.key});
+class AddassignmentWidget extends StatefulWidget {
+  const AddassignmentWidget({super.key});
 
   @override
-  State<AddclassWidget> createState() => _AddclassWidgetState();
+  State<AddassignmentWidget> createState() => _AddassignmentWidgetState();
 }
 
-class _AddclassWidgetState extends State<AddclassWidget> {
-  late AddclassModel _model;
+class _AddassignmentWidgetState extends State<AddassignmentWidget> {
+  late AddassignmentModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AddclassModel());
+    _model = createModel(context, () => AddassignmentModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -65,7 +65,7 @@ class _AddclassWidgetState extends State<AddclassWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
-                context.pushNamed('classschedule');
+                context.pushNamed('Assignmenttracker');
               },
               child: Icon(
                 Icons.arrow_back,
@@ -112,8 +112,8 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 20.0),
-                        child: StreamBuilder<List<ClasscolRecord>>(
-                          stream: queryClasscolRecord(
+                        child: StreamBuilder<List<AssignmentRecord>>(
+                          stream: queryAssignmentRecord(
                             singleRecord: true,
                           ),
                           builder: (context, snapshot) {
@@ -130,11 +130,11 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                 ),
                               );
                             }
-                            List<ClasscolRecord> columnClasscolRecordList =
+                            List<AssignmentRecord> columnAssignmentRecordList =
                                 snapshot.data!;
-                            final columnClasscolRecord =
-                                columnClasscolRecordList.isNotEmpty
-                                    ? columnClasscolRecordList.first
+                            final columnAssignmentRecord =
+                                columnAssignmentRecordList.isNotEmpty
+                                    ? columnAssignmentRecordList.first
                                     : null;
 
                             return Column(
@@ -146,7 +146,7 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                   autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Class Name',
+                                    labelText: 'Assignment Title',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -208,7 +208,7 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                   autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Location',
+                                    labelText: 'Note',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -216,7 +216,7 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                           letterSpacing: 0.0,
                                         ),
                                     hintStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
+                                        .bodyLarge
                                         .override(
                                           fontFamily: 'Inter',
                                           letterSpacing: 0.0,
@@ -252,9 +252,6 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                     filled: true,
                                     fillColor: FlutterFlowTheme.of(context)
                                         .primaryBackground,
-                                    suffixIcon: const Icon(
-                                      Icons.place,
-                                    ),
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
@@ -262,6 +259,7 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                         fontFamily: 'Inter',
                                         letterSpacing: 0.0,
                                       ),
+                                  maxLines: 3,
                                   minLines: 1,
                                   validator: _model
                                       .setlocationTextControllerValidator
@@ -378,7 +376,7 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                       });
                                     }
                                   },
-                                  text: 'Pick Date/Time',
+                                  text: 'Deadline',
                                   options: FFButtonOptions(
                                     width:
                                         MediaQuery.sizeOf(context).width * 1.0,
@@ -402,19 +400,19 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    await ClasscolRecord.collection
+                                    await AssignmentRecord.collection
                                         .doc()
-                                        .set(createClasscolRecordData(
-                                          classname: _model
+                                        .set(createAssignmentRecordData(
+                                          assignmentTitle: _model
                                               .setclassnameTextController.text,
-                                          location: _model
+                                          deadline: _model.datePicked,
+                                          note: _model
                                               .setlocationTextController.text,
-                                          date: _model.datePicked,
                                         ));
                                     await Future.delayed(
                                         const Duration(milliseconds: 1000));
 
-                                    context.pushNamed('classschedule');
+                                    context.pushNamed('Assignmenttracker');
                                   },
                                   text: 'Save Class',
                                   options: FFButtonOptions(

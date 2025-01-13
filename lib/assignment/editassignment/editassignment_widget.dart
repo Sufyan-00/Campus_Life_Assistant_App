@@ -2,40 +2,36 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'addclass_model.dart';
-export 'addclass_model.dart';
+import 'editassignment_model.dart';
+export 'editassignment_model.dart';
 
-class AddclassWidget extends StatefulWidget {
-  const AddclassWidget({super.key});
+class EditassignmentWidget extends StatefulWidget {
+  const EditassignmentWidget({
+    super.key,
+    required this.assignmentTitle,
+  });
+
+  final String? assignmentTitle;
 
   @override
-  State<AddclassWidget> createState() => _AddclassWidgetState();
+  State<EditassignmentWidget> createState() => _EditassignmentWidgetState();
 }
 
-class _AddclassWidgetState extends State<AddclassWidget> {
-  late AddclassModel _model;
+class _EditassignmentWidgetState extends State<EditassignmentWidget> {
+  late EditassignmentModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AddclassModel());
+    _model = createModel(context, () => EditassignmentModel());
 
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.isOnline = await actions.checkConnectivity();
-    });
+    _model.editclassnameFocusNode ??= FocusNode();
 
-    _model.setclassnameTextController ??= TextEditingController();
-    _model.setclassnameFocusNode ??= FocusNode();
-
-    _model.setlocationTextController ??= TextEditingController();
-    _model.setlocationFocusNode ??= FocusNode();
+    _model.editlocationFocusNode ??= FocusNode();
   }
 
   @override
@@ -65,7 +61,7 @@ class _AddclassWidgetState extends State<AddclassWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
-                context.pushNamed('classschedule');
+                context.pushNamed('Assignmenttracker');
               },
               child: Icon(
                 Icons.arrow_back,
@@ -74,16 +70,12 @@ class _AddclassWidgetState extends State<AddclassWidget> {
               ),
             ),
           ),
-          title: Align(
-            alignment: const AlignmentDirectional(-1.0, 0.0),
-            child: Text(
-              'Add New Class  Schedule',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily: 'Inter Tight',
-                    fontSize: 22.0,
-                    letterSpacing: 0.0,
-                  ),
-            ),
+          title: Text(
+            'Edit Assignment',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Inter Tight',
+                  letterSpacing: 0.0,
+                ),
           ),
           actions: const [],
           centerTitle: false,
@@ -97,56 +89,70 @@ class _AddclassWidgetState extends State<AddclassWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Material(
-                    color: Colors.transparent,
-                    elevation: 2.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16.0),
-                    ),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: BorderRadius.circular(16.0),
+                  StreamBuilder<List<AssignmentRecord>>(
+                    stream: queryAssignmentRecord(
+                      queryBuilder: (assignmentRecord) =>
+                          assignmentRecord.where(
+                        'assignmentTitle',
+                        isEqualTo: widget.assignmentTitle,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            20.0, 20.0, 20.0, 20.0),
-                        child: StreamBuilder<List<ClasscolRecord>>(
-                          stream: queryClasscolRecord(
-                            singleRecord: true,
+                      singleRecord: true,
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: SpinKitCircle(
+                              color: FlutterFlowTheme.of(context).primary,
+                              size: 50.0,
+                            ),
                           ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: SpinKitCircle(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    size: 50.0,
-                                  ),
-                                ),
-                              );
-                            }
-                            List<ClasscolRecord> columnClasscolRecordList =
-                                snapshot.data!;
-                            final columnClasscolRecord =
-                                columnClasscolRecordList.isNotEmpty
-                                    ? columnClasscolRecordList.first
-                                    : null;
+                        );
+                      }
+                      List<AssignmentRecord> containerAssignmentRecordList =
+                          snapshot.data!;
+                      final containerAssignmentRecord =
+                          containerAssignmentRecordList.isNotEmpty
+                              ? containerAssignmentRecordList.first
+                              : null;
 
-                            return Column(
+                      return Material(
+                        color: Colors.transparent,
+                        elevation: 2.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                20.0, 20.0, 20.0, 20.0),
+                            child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 TextFormField(
-                                  controller: _model.setclassnameTextController,
-                                  focusNode: _model.setclassnameFocusNode,
+                                  controller:
+                                      _model.editclassnameTextController ??=
+                                          TextEditingController(
+                                    text: valueOrDefault<String>(
+                                      containerAssignmentRecord
+                                          ?.assignmentTitle,
+                                      'Title',
+                                    ),
+                                  ),
+                                  focusNode: _model.editclassnameFocusNode,
                                   autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Class Name',
+                                    labelText: 'Assignment Title',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -199,16 +205,23 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                       ),
                                   minLines: 1,
                                   validator: _model
-                                      .setclassnameTextControllerValidator
+                                      .editclassnameTextControllerValidator
                                       .asValidator(context),
                                 ),
                                 TextFormField(
-                                  controller: _model.setlocationTextController,
-                                  focusNode: _model.setlocationFocusNode,
+                                  controller:
+                                      _model.editlocationTextController ??=
+                                          TextEditingController(
+                                    text: valueOrDefault<String>(
+                                      containerAssignmentRecord?.note,
+                                      'Note',
+                                    ),
+                                  ),
+                                  focusNode: _model.editlocationFocusNode,
                                   autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Location',
+                                    labelText: 'Note',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -252,9 +265,6 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                     filled: true,
                                     fillColor: FlutterFlowTheme.of(context)
                                         .primaryBackground,
-                                    suffixIcon: const Icon(
-                                      Icons.place,
-                                    ),
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyLarge
@@ -262,9 +272,10 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                         fontFamily: 'Inter',
                                         letterSpacing: 0.0,
                                       ),
+                                  maxLines: 3,
                                   minLines: 1,
                                   validator: _model
-                                      .setlocationTextControllerValidator
+                                      .editlocationTextControllerValidator
                                       .asValidator(context),
                                 ),
                                 FFButtonWidget(
@@ -378,7 +389,7 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                       });
                                     }
                                   },
-                                  text: 'Pick Date/Time',
+                                  text: 'Deadline',
                                   options: FFButtonOptions(
                                     width:
                                         MediaQuery.sizeOf(context).width * 1.0,
@@ -402,21 +413,20 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    await ClasscolRecord.collection
-                                        .doc()
-                                        .set(createClasscolRecordData(
-                                          classname: _model
-                                              .setclassnameTextController.text,
-                                          location: _model
-                                              .setlocationTextController.text,
-                                          date: _model.datePicked,
-                                        ));
+                                    await containerAssignmentRecord!.reference
+                                        .update(createAssignmentRecordData(
+                                      assignmentTitle: _model
+                                          .editclassnameTextController.text,
+                                      deadline: _model.datePicked,
+                                      note: _model
+                                          .editlocationTextController.text,
+                                    ));
                                     await Future.delayed(
                                         const Duration(milliseconds: 1000));
 
-                                    context.pushNamed('classschedule');
+                                    context.pushNamed('Assignmenttracker');
                                   },
-                                  text: 'Save Class',
+                                  text: 'Save',
                                   options: FFButtonOptions(
                                     width:
                                         MediaQuery.sizeOf(context).width * 1.0,
@@ -439,11 +449,11 @@ class _AddclassWidgetState extends State<AddclassWidget> {
                                   ),
                                 ),
                               ].divide(const SizedBox(height: 16.0)),
-                            );
-                          },
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ].divide(const SizedBox(height: 24.0)),
               ),

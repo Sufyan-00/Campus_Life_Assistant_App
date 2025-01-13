@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 class ClassscheduleModel extends FlutterFlowModel<ClassscheduleWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - checkInternetConnection] action in classschedule widget.
-  bool? connect;
+  // Stores action output result for [Custom Action - checkConnectivity] action in classschedule widget.
+  bool? isOnline;
 
   @override
   void initState(BuildContext context) {}

@@ -7,6 +7,10 @@ import 'schema/util/firestore_util.dart';
 
 import 'schema/user_record.dart';
 import 'schema/classcol_record.dart';
+import 'schema/assignment_record.dart';
+import 'schema/groupfinder_record.dart';
+import 'schema/feedback_record.dart';
+import 'schema/eventnotify_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -17,6 +21,10 @@ export 'schema/util/schema_util.dart';
 
 export 'schema/user_record.dart';
 export 'schema/classcol_record.dart';
+export 'schema/assignment_record.dart';
+export 'schema/groupfinder_record.dart';
+export 'schema/feedback_record.dart';
+export 'schema/eventnotify_record.dart';
 
 /// Functions to query UserRecords (as a Stream and as a Future).
 Future<int> queryUserRecordCount({
@@ -87,6 +95,154 @@ Future<List<ClasscolRecord>> queryClasscolRecordOnce({
     queryCollectionOnce(
       ClasscolRecord.collection,
       ClasscolRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query AssignmentRecords (as a Stream and as a Future).
+Future<int> queryAssignmentRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      AssignmentRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<AssignmentRecord>> queryAssignmentRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      AssignmentRecord.collection,
+      AssignmentRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<AssignmentRecord>> queryAssignmentRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      AssignmentRecord.collection,
+      AssignmentRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query GroupfinderRecords (as a Stream and as a Future).
+Future<int> queryGroupfinderRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      GroupfinderRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<GroupfinderRecord>> queryGroupfinderRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      GroupfinderRecord.collection,
+      GroupfinderRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<GroupfinderRecord>> queryGroupfinderRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      GroupfinderRecord.collection,
+      GroupfinderRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query FeedbackRecords (as a Stream and as a Future).
+Future<int> queryFeedbackRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      FeedbackRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<FeedbackRecord>> queryFeedbackRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      FeedbackRecord.collection,
+      FeedbackRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<FeedbackRecord>> queryFeedbackRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      FeedbackRecord.collection,
+      FeedbackRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query EventnotifyRecords (as a Stream and as a Future).
+Future<int> queryEventnotifyRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      EventnotifyRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<EventnotifyRecord>> queryEventnotifyRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      EventnotifyRecord.collection,
+      EventnotifyRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<EventnotifyRecord>> queryEventnotifyRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      EventnotifyRecord.collection,
+      EventnotifyRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

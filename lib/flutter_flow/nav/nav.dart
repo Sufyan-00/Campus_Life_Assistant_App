@@ -123,6 +123,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
+        ),
+        FFRoute(
+          name: 'Assignmenttracker',
+          path: '/assignmenttracker',
+          builder: (context, params) => const AssignmenttrackerWidget(),
+        ),
+        FFRoute(
+          name: 'addassignment',
+          path: '/addassignment',
+          builder: (context, params) => const AddassignmentWidget(),
+        ),
+        FFRoute(
+          name: 'editassignment',
+          path: '/editassignment',
+          builder: (context, params) => EditassignmentWidget(
+            assignmentTitle: params.getParam(
+              'assignmentTitle',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

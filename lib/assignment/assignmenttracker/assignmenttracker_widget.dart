@@ -6,25 +6,26 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'classschedule_model.dart';
-export 'classschedule_model.dart';
+import 'assignmenttracker_model.dart';
+export 'assignmenttracker_model.dart';
 
-class ClassscheduleWidget extends StatefulWidget {
-  const ClassscheduleWidget({super.key});
+class AssignmenttrackerWidget extends StatefulWidget {
+  const AssignmenttrackerWidget({super.key});
 
   @override
-  State<ClassscheduleWidget> createState() => _ClassscheduleWidgetState();
+  State<AssignmenttrackerWidget> createState() =>
+      _AssignmenttrackerWidgetState();
 }
 
-class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
-  late ClassscheduleModel _model;
+class _AssignmenttrackerWidgetState extends State<AssignmenttrackerWidget> {
+  late AssignmenttrackerModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ClassscheduleModel());
+    _model = createModel(context, () => AssignmenttrackerModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -69,7 +70,7 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
             ),
           ),
           title: Text(
-            'Class Schedule',
+            'Assignment Track',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Inter Tight',
                   letterSpacing: 0.0,
@@ -87,7 +88,7 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed('addclass');
+                  context.pushNamed('addassignment');
                 },
               ),
             ),
@@ -143,8 +144,11 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                           child: Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 20.0, 20.0, 20.0, 20.0),
-                            child: StreamBuilder<List<ClasscolRecord>>(
-                              stream: queryClasscolRecord(),
+                            child: StreamBuilder<List<AssignmentRecord>>(
+                              stream: queryAssignmentRecord(
+                                queryBuilder: (assignmentRecord) =>
+                                    assignmentRecord.orderBy('deadline'),
+                              ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
                                 if (!snapshot.hasData) {
@@ -160,52 +164,26 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                                     ),
                                   );
                                 }
-                                List<ClasscolRecord> columnClasscolRecordList =
-                                    snapshot.data!;
+                                List<AssignmentRecord>
+                                    columnAssignmentRecordList = snapshot.data!;
 
                                 return Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: List.generate(
-                                      columnClasscolRecordList.length,
+                                      columnAssignmentRecordList.length,
                                       (columnIndex) {
-                                    final columnClasscolRecord =
-                                        columnClasscolRecordList[columnIndex];
+                                    final columnAssignmentRecord =
+                                        columnAssignmentRecordList[columnIndex];
                                     return Padding(
                                       padding: const EdgeInsets.all(4.0),
                                       child: SizedBox(
-                                        height: 84.0,
+                                        height: 110.0,
                                         child: Stack(
                                           alignment:
                                               const AlignmentDirectional(0.0, 0.0),
                                           children: [
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  -0.9, 1.0),
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(4.0),
-                                                child: Text(
-                                                  valueOrDefault<String>(
-                                                    columnClasscolRecord
-                                                        .location,
-                                                    'Room',
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodySmall
-                                                      .override(
-                                                        fontFamily:
-                                                            'Inter Tight',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                ),
-                                              ),
-                                            ),
                                             Align(
                                               alignment: const AlignmentDirectional(
                                                   0.75, 0.0),
@@ -222,12 +200,12 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                                                       Colors.transparent,
                                                   onTap: () async {
                                                     context.pushNamed(
-                                                      'EditClass',
+                                                      'editassignment',
                                                       queryParameters: {
-                                                        'className':
+                                                        'assignmentTitle':
                                                             serializeParam(
-                                                          columnClasscolRecord
-                                                              .classname,
+                                                          columnAssignmentRecord
+                                                              .assignmentTitle,
                                                           ParamType.String,
                                                         ),
                                                       }.withoutNulls,
@@ -258,7 +236,7 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
-                                                    await columnClasscolRecord
+                                                    await columnAssignmentRecord
                                                         .reference
                                                         .delete();
                                                   },
@@ -281,8 +259,8 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                                                   valueOrDefault<String>(
                                                     dateTimeFormat(
                                                         "EEEE",
-                                                        columnClasscolRecord
-                                                            .date),
+                                                        columnAssignmentRecord
+                                                            .deadline),
                                                     'Day',
                                                   ),
                                                   style: FlutterFlowTheme.of(
@@ -302,15 +280,12 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                                             ),
                                             Align(
                                               alignment: const AlignmentDirectional(
-                                                  -0.92, -0.32),
+                                                  -0.93, -0.53),
                                               child: Padding(
                                                 padding: const EdgeInsets.all(4.0),
                                                 child: Text(
-                                                  valueOrDefault<String>(
-                                                    columnClasscolRecord
-                                                        .classname,
-                                                    'Class Name',
-                                                  ),
+                                                  columnAssignmentRecord
+                                                      .assignmentTitle,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyLarge
@@ -326,16 +301,16 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                                             ),
                                             Align(
                                               alignment: const AlignmentDirectional(
-                                                  -0.92, 0.36),
+                                                  -0.94, -0.03),
                                               child: Padding(
                                                 padding: const EdgeInsets.all(4.0),
                                                 child: Text(
                                                   valueOrDefault<String>(
                                                     dateTimeFormat(
-                                                        "jm",
-                                                        columnClasscolRecord
-                                                            .date),
-                                                    'Time',
+                                                        "M/d h:mm a",
+                                                        columnAssignmentRecord
+                                                            .deadline),
+                                                    'Deadline',
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -348,6 +323,28 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                                                                     context)
                                                                 .secondaryText,
                                                         letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                            Align(
+                                              alignment: const AlignmentDirectional(
+                                                  -0.93, 0.53),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: Text(
+                                                  valueOrDefault<String>(
+                                                    columnAssignmentRecord.note,
+                                                    'Note',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                        fontStyle:
+                                                            FontStyle.italic,
                                                       ),
                                                 ),
                                               ),

@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 class AddassignmentModel extends FlutterFlowModel<AddassignmentWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - checkConnectivity] action in addassignment widget.
-  bool? isOnline;
   // State field(s) for setclassname widget.
   FocusNode? setclassnameFocusNode;
   TextEditingController? setclassnameTextController;

@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 class AddclassModel extends FlutterFlowModel<AddclassWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - checkConnectivity] action in addclass widget.
-  bool? isOnline;
   // State field(s) for setclassname widget.
   FocusNode? setclassnameFocusNode;
   TextEditingController? setclassnameTextController;

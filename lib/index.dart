@@ -17,4 +17,3 @@ export '/feedback/feedbackview/feedbackview_widget.dart'
     show FeedbackviewWidget;
 export '/feedback/addfeedback/addfeedback_widget.dart' show AddfeedbackWidget;
 export '/profile/profile_widget.dart' show ProfileWidget;
-export '/profileedit/profileedit_widget.dart' show ProfileeditWidget;

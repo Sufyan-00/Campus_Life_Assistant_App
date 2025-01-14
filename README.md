@@ -126,5 +126,5 @@ https://github.com/user-attachments/assets/e9ffec4b-1b62-4b39-a384-828a8f71a694
 
 # WARNNING!
 
-## App might not be fully optimized according to industry standards. It is an inividual effort.
+## App might not be fully optimized according to industry standards. It is an individual effort.
 

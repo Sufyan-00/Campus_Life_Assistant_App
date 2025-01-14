@@ -158,16 +158,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'profile',
           path: '/profile',
           builder: (context, params) => const ProfileWidget(),
-        ),
-        FFRoute(
-          name: 'profileedit',
-          path: '/profileedit',
-          builder: (context, params) => ProfileeditWidget(
-            uidRef: params.getParam(
-              'uidRef',
-              ParamType.String,
-            ),
-          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

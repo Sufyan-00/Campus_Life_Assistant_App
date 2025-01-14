@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 class AddfeedbackModel extends FlutterFlowModel<AddfeedbackWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - checkConnectivity] action in addfeedback widget.
-  bool? isOnline;
   // State field(s) for category widget.
   FocusNode? categoryFocusNode;
   TextEditingController? categoryTextController;

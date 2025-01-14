@@ -2,9 +2,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'assignmenttracker_model.dart';
 export 'assignmenttracker_model.dart';
@@ -26,11 +24,6 @@ class _AssignmenttrackerWidgetState extends State<AssignmenttrackerWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => AssignmenttrackerModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.isOnline = await actions.checkConnectivity();
-    });
   }
 
   @override
@@ -85,7 +78,7 @@ class _AssignmenttrackerWidgetState extends State<AssignmenttrackerWidget> {
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed('addassignment');
+                  context.goNamed('addassignment');
                 },
               ),
             ),

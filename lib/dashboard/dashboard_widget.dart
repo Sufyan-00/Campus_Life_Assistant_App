@@ -83,7 +83,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    context.pushNamed('profile');
+                                    context.goNamed('profile');
                                   },
                                   child: const Icon(
                                     Icons.person,

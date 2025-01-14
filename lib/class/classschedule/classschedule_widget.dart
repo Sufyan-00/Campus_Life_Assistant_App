@@ -2,9 +2,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'classschedule_model.dart';
 export 'classschedule_model.dart';
@@ -25,11 +23,6 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ClassscheduleModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.isOnline = await actions.checkConnectivity();
-    });
   }
 
   @override
@@ -84,7 +77,7 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed('addclass');
+                  context.goNamed('addclass');
                 },
               ),
             ),

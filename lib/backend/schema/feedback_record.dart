@@ -15,13 +15,19 @@ class FeedbackRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "username" field.
-  String? _username;
-  String get username => _username ?? '';
-  bool hasUsername() => _username != null;
+  // "feedcategory" field.
+  String? _feedcategory;
+  String get feedcategory => _feedcategory ?? '';
+  bool hasFeedcategory() => _feedcategory != null;
+
+  // "feedtext" field.
+  String? _feedtext;
+  String get feedtext => _feedtext ?? '';
+  bool hasFeedtext() => _feedtext != null;
 
   void _initializeFields() {
-    _username = snapshotData['username'] as String?;
+    _feedcategory = snapshotData['feedcategory'] as String?;
+    _feedtext = snapshotData['feedtext'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -59,11 +65,13 @@ class FeedbackRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createFeedbackRecordData({
-  String? username,
+  String? feedcategory,
+  String? feedtext,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'username': username,
+      'feedcategory': feedcategory,
+      'feedtext': feedtext,
     }.withoutNulls,
   );
 
@@ -75,11 +83,12 @@ class FeedbackRecordDocumentEquality implements Equality<FeedbackRecord> {
 
   @override
   bool equals(FeedbackRecord? e1, FeedbackRecord? e2) {
-    return e1?.username == e2?.username;
+    return e1?.feedcategory == e2?.feedcategory && e1?.feedtext == e2?.feedtext;
   }
 
   @override
-  int hash(FeedbackRecord? e) => const ListEquality().hash([e?.username]);
+  int hash(FeedbackRecord? e) =>
+      const ListEquality().hash([e?.feedcategory, e?.feedtext]);
 
   @override
   bool isValidKey(Object? o) => o is FeedbackRecord;

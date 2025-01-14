@@ -6,36 +6,36 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'addassignment_model.dart';
-export 'addassignment_model.dart';
+import 'addfeedback_model.dart';
+export 'addfeedback_model.dart';
 
-class AddassignmentWidget extends StatefulWidget {
-  const AddassignmentWidget({super.key});
+class AddfeedbackWidget extends StatefulWidget {
+  const AddfeedbackWidget({super.key});
 
   @override
-  State<AddassignmentWidget> createState() => _AddassignmentWidgetState();
+  State<AddfeedbackWidget> createState() => _AddfeedbackWidgetState();
 }
 
-class _AddassignmentWidgetState extends State<AddassignmentWidget> {
-  late AddassignmentModel _model;
+class _AddfeedbackWidgetState extends State<AddfeedbackWidget> {
+  late AddfeedbackModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AddassignmentModel());
+    _model = createModel(context, () => AddfeedbackModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.isOnline = await actions.checkConnectivity();
     });
 
-    _model.setclassnameTextController ??= TextEditingController();
-    _model.setclassnameFocusNode ??= FocusNode();
+    _model.categoryTextController ??= TextEditingController();
+    _model.categoryFocusNode ??= FocusNode();
 
-    _model.setlocationTextController ??= TextEditingController();
-    _model.setlocationFocusNode ??= FocusNode();
+    _model.textTextController ??= TextEditingController();
+    _model.textFocusNode ??= FocusNode();
   }
 
   @override
@@ -63,7 +63,7 @@ class _AddassignmentWidgetState extends State<AddassignmentWidget> {
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () async {
-              context.goNamed('Assignmenttracker');
+              context.goNamed('feedbackview');
             },
             child: Icon(
               Icons.arrow_back,
@@ -74,7 +74,7 @@ class _AddassignmentWidgetState extends State<AddassignmentWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              'Add New Assignment',
+              'Add Feedback',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Inter Tight',
                     fontSize: 22.0,
@@ -109,8 +109,8 @@ class _AddassignmentWidgetState extends State<AddassignmentWidget> {
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 20.0),
-                        child: StreamBuilder<List<AssignmentRecord>>(
-                          stream: queryAssignmentRecord(
+                        child: StreamBuilder<List<FeedbackRecord>>(
+                          stream: queryFeedbackRecord(
                             singleRecord: true,
                           ),
                           builder: (context, snapshot) {
@@ -127,23 +127,23 @@ class _AddassignmentWidgetState extends State<AddassignmentWidget> {
                                 ),
                               );
                             }
-                            List<AssignmentRecord> columnAssignmentRecordList =
+                            List<FeedbackRecord> columnFeedbackRecordList =
                                 snapshot.data!;
-                            final columnAssignmentRecord =
-                                columnAssignmentRecordList.isNotEmpty
-                                    ? columnAssignmentRecordList.first
+                            final columnFeedbackRecord =
+                                columnFeedbackRecordList.isNotEmpty
+                                    ? columnFeedbackRecordList.first
                                     : null;
 
                             return Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 TextFormField(
-                                  controller: _model.setclassnameTextController,
-                                  focusNode: _model.setclassnameFocusNode,
+                                  controller: _model.categoryTextController,
+                                  focusNode: _model.categoryFocusNode,
                                   autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Assignment Title',
+                                    labelText: 'Category',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -196,16 +196,16 @@ class _AddassignmentWidgetState extends State<AddassignmentWidget> {
                                       ),
                                   minLines: 1,
                                   validator: _model
-                                      .setclassnameTextControllerValidator
+                                      .categoryTextControllerValidator
                                       .asValidator(context),
                                 ),
                                 TextFormField(
-                                  controller: _model.setlocationTextController,
-                                  focusNode: _model.setlocationFocusNode,
+                                  controller: _model.textTextController,
+                                  focusNode: _model.textFocusNode,
                                   autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Note',
+                                    labelText: 'Text',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -213,7 +213,7 @@ class _AddassignmentWidgetState extends State<AddassignmentWidget> {
                                           letterSpacing: 0.0,
                                         ),
                                     hintStyle: FlutterFlowTheme.of(context)
-                                        .bodyLarge
+                                        .bodyMedium
                                         .override(
                                           fontFamily: 'Inter',
                                           letterSpacing: 0.0,
@@ -256,162 +256,26 @@ class _AddassignmentWidgetState extends State<AddassignmentWidget> {
                                         fontFamily: 'Inter',
                                         letterSpacing: 0.0,
                                       ),
-                                  maxLines: 3,
                                   minLines: 1,
-                                  validator: _model
-                                      .setlocationTextControllerValidator
+                                  validator: _model.textTextControllerValidator
                                       .asValidator(context),
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    final datePickedDate =
-                                        await showDatePicker(
-                                      context: context,
-                                      initialDate: getCurrentTimestamp,
-                                      firstDate:
-                                          (DateTime.fromMicrosecondsSinceEpoch(
-                                                  1735671600000000) ??
-                                              DateTime(1900)),
-                                      lastDate:
-                                          (DateTime.fromMicrosecondsSinceEpoch(
-                                                  1893438000000000) ??
-                                              DateTime(2050)),
-                                      builder: (context, child) {
-                                        return wrapInMaterialDatePickerTheme(
-                                          context,
-                                          child!,
-                                          headerBackgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          headerForegroundColor:
-                                              FlutterFlowTheme.of(context).info,
-                                          headerTextStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineLarge
-                                                  .override(
-                                                    fontFamily: 'Inter Tight',
-                                                    fontSize: 32.0,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                          pickerBackgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondaryBackground,
-                                          pickerForegroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          selectedDateTimeBackgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                          selectedDateTimeForegroundColor:
-                                              FlutterFlowTheme.of(context).info,
-                                          actionButtonForegroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryText,
-                                          iconSize: 24.0,
-                                        );
-                                      },
-                                    );
-
-                                    TimeOfDay? datePickedTime;
-                                    if (datePickedDate != null) {
-                                      datePickedTime = await showTimePicker(
-                                        context: context,
-                                        initialTime: TimeOfDay.fromDateTime(
-                                            getCurrentTimestamp),
-                                        builder: (context, child) {
-                                          return wrapInMaterialTimePickerTheme(
-                                            context,
-                                            child!,
-                                            headerBackgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            headerForegroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .info,
-                                            headerTextStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .headlineLarge
-                                                    .override(
-                                                      fontFamily: 'Inter Tight',
-                                                      fontSize: 32.0,
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
-                                            pickerBackgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            pickerForegroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            selectedDateTimeBackgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                            selectedDateTimeForegroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .info,
-                                            actionButtonForegroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            iconSize: 24.0,
-                                          );
-                                        },
-                                      );
-                                    }
-
-                                    if (datePickedDate != null &&
-                                        datePickedTime != null) {
-                                      safeSetState(() {
-                                        _model.datePicked = DateTime(
-                                          datePickedDate.year,
-                                          datePickedDate.month,
-                                          datePickedDate.day,
-                                          datePickedTime!.hour,
-                                          datePickedTime.minute,
-                                        );
-                                      });
-                                    }
-                                  },
-                                  text: 'Deadline',
-                                  options: FFButtonOptions(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 1.0,
-                                    height: 50.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Inter Tight',
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
-                                          letterSpacing: 0.0,
-                                        ),
-                                    elevation: 0.0,
-                                    borderRadius: BorderRadius.circular(25.0),
-                                  ),
-                                ),
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    await AssignmentRecord.collection
+                                    await FeedbackRecord.collection
                                         .doc()
-                                        .set(createAssignmentRecordData(
-                                          assignmentTitle: _model
-                                              .setclassnameTextController.text,
-                                          deadline: _model.datePicked,
-                                          note: _model
-                                              .setlocationTextController.text,
+                                        .set(createFeedbackRecordData(
+                                          feedcategory: _model
+                                              .categoryTextController.text,
+                                          feedtext:
+                                              _model.textTextController.text,
                                         ));
                                     await Future.delayed(
                                         const Duration(milliseconds: 1000));
 
-                                    context.pushNamed('Assignmenttracker');
+                                    context.pushNamed('feedbackview');
                                   },
-                                  text: 'Save Class',
+                                  text: 'Save Feedback',
                                   options: FFButtonOptions(
                                     width:
                                         MediaQuery.sizeOf(context).width * 1.0,

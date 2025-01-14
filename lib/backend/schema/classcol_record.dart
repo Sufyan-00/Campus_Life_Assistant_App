@@ -35,11 +35,17 @@ class ClasscolRecord extends FirestoreRecord {
   String get cid => _cid ?? '';
   bool hasCid() => _cid != null;
 
+  // "lastUpdated" field.
+  String? _lastUpdated;
+  String get lastUpdated => _lastUpdated ?? '';
+  bool hasLastUpdated() => _lastUpdated != null;
+
   void _initializeFields() {
     _classname = snapshotData['classname'] as String?;
     _location = snapshotData['location'] as String?;
     _date = snapshotData['date'] as DateTime?;
     _cid = snapshotData['cid'] as String?;
+    _lastUpdated = snapshotData['lastUpdated'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -81,6 +87,7 @@ Map<String, dynamic> createClasscolRecordData({
   String? location,
   DateTime? date,
   String? cid,
+  String? lastUpdated,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -88,6 +95,7 @@ Map<String, dynamic> createClasscolRecordData({
       'location': location,
       'date': date,
       'cid': cid,
+      'lastUpdated': lastUpdated,
     }.withoutNulls,
   );
 
@@ -102,12 +110,13 @@ class ClasscolRecordDocumentEquality implements Equality<ClasscolRecord> {
     return e1?.classname == e2?.classname &&
         e1?.location == e2?.location &&
         e1?.date == e2?.date &&
-        e1?.cid == e2?.cid;
+        e1?.cid == e2?.cid &&
+        e1?.lastUpdated == e2?.lastUpdated;
   }
 
   @override
-  int hash(ClasscolRecord? e) =>
-      const ListEquality().hash([e?.classname, e?.location, e?.date, e?.cid]);
+  int hash(ClasscolRecord? e) => const ListEquality()
+      .hash([e?.classname, e?.location, e?.date, e?.cid, e?.lastUpdated]);
 
   @override
   bool isValidKey(Object? o) => o is ClasscolRecord;

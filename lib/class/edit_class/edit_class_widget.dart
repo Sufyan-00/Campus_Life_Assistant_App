@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/backend/sqlite/sqlite_manager.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -422,14 +421,6 @@ class _EditClassWidgetState extends State<EditClassWidget> {
                                           .editlocationTextController.text,
                                       date: _model.datePicked,
                                     ));
-                                    await SQLiteManager.instance.updateclass(
-                                      classname: _model
-                                          .editclassnameTextController.text,
-                                      location: _model
-                                          .editlocationTextController.text,
-                                      date: dateTimeFormat(
-                                          "M/d h:mm a", _model.datePicked),
-                                    );
                                     await Future.delayed(
                                         const Duration(milliseconds: 1000));
 

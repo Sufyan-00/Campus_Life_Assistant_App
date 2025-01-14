@@ -13,6 +13,10 @@ class EditClassModel extends FlutterFlowModel<EditClassWidget> {
   FocusNode? editlocationFocusNode;
   TextEditingController? editlocationTextController;
   String? Function(BuildContext, String?)? editlocationTextControllerValidator;
+  // State field(s) for editdate widget.
+  FocusNode? editdateFocusNode;
+  TextEditingController? editdateTextController;
+  String? Function(BuildContext, String?)? editdateTextControllerValidator;
   DateTime? datePicked;
 
   @override
@@ -25,5 +29,8 @@ class EditClassModel extends FlutterFlowModel<EditClassWidget> {
 
     editlocationFocusNode?.dispose();
     editlocationTextController?.dispose();
+
+    editdateFocusNode?.dispose();
+    editdateTextController?.dispose();
   }
 }

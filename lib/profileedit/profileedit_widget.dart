@@ -125,8 +125,8 @@ class _ProfileeditWidgetState extends State<ProfileeditWidget> {
                         ),
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 15.0, 0.0, 0.0),
                         child: Text(
                           'Edit your Profile',
                           style: FlutterFlowTheme.of(context)

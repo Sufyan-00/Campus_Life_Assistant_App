@@ -15,6 +15,10 @@ class AddassignmentModel extends FlutterFlowModel<AddassignmentWidget> {
   FocusNode? setlocationFocusNode;
   TextEditingController? setlocationTextController;
   String? Function(BuildContext, String?)? setlocationTextControllerValidator;
+  // State field(s) for setDate widget.
+  FocusNode? setDateFocusNode;
+  TextEditingController? setDateTextController;
+  String? Function(BuildContext, String?)? setDateTextControllerValidator;
   DateTime? datePicked;
 
   @override
@@ -27,5 +31,8 @@ class AddassignmentModel extends FlutterFlowModel<AddassignmentWidget> {
 
     setlocationFocusNode?.dispose();
     setlocationTextController?.dispose();
+
+    setDateFocusNode?.dispose();
+    setDateTextController?.dispose();
   }
 }

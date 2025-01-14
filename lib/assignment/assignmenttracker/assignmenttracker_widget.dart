@@ -249,12 +249,15 @@ class _AssignmenttrackerWidgetState extends State<AssignmenttrackerWidget> {
                                           ),
                                           Align(
                                             alignment: const AlignmentDirectional(
-                                                -0.93, -0.53),
+                                                -0.95, -0.48),
                                             child: Padding(
                                               padding: const EdgeInsets.all(4.0),
                                               child: Text(
-                                                columnAssignmentRecord
-                                                    .assignmentTitle,
+                                                valueOrDefault<String>(
+                                                  columnAssignmentRecord
+                                                      .assignmentTitle,
+                                                  'Title',
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge
@@ -270,13 +273,13 @@ class _AssignmenttrackerWidgetState extends State<AssignmenttrackerWidget> {
                                           ),
                                           Align(
                                             alignment: const AlignmentDirectional(
-                                                -0.94, -0.03),
+                                                -0.92, 0.06),
                                             child: Padding(
                                               padding: const EdgeInsets.all(4.0),
                                               child: Text(
                                                 valueOrDefault<String>(
                                                   dateTimeFormat(
-                                                      "M/d h:mm a",
+                                                      "EEE, MMM d - h:mm a",
                                                       columnAssignmentRecord
                                                           .deadline),
                                                   'Deadline',

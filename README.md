@@ -61,45 +61,70 @@
 
 <img width="350" height="720" alt="" src="https://github.com/user-attachments/assets/ed125314-adce-4570-884e-a6425fb09beb" />
 
-**SignIN page**
+
+
+**SignIn page**
 
 <img width="350" height="720" alt="" src="https://github.com/user-attachments/assets/498ba1f1-8730-4885-9c1f-f3f8797a1394" />
 
 
-**Dashboard**
+
+**Dashboard page**
 
 <img width="350" height="720" alt="" src="https://github.com/user-attachments/assets/dedd2cfc-a091-4a3f-9892-4aad6fc7c16e" />
 
-**ClassSchedule**
+
+
+**ClassSchedule page**
 
 <img width="350" height="720" alt="" src="https://github.com/user-attachments/assets/610812ad-d38a-4cc6-a12b-baf075cc6808" />
 
-**Add Class schedule**
+
+
+**Add Class schedule page**
 
 <img width="350" height="720" alt="" src="https://github.com/user-attachments/assets/4dde09b0-f715-4fb0-9fa3-f763a3193ac2" />
+
 
 
 **Assignments Page**
 
 <img width="350" height="720" alt="" src="https://github.com/user-attachments/assets/03e2780c-cb2f-4f6c-bdbd-ae33730c5783" />
 
-**Add assignment**
+
+
+**Add assignment page**
 
 <img width="350" height="720" alt="" src="https://github.com/user-attachments/assets/c717b821-2962-4b0f-a33d-f68bce6be7c2" />
 
-**Feedbacks**
+
+
+**Feedbacks page**
 
 <img width="350" height="720" alt="" src="https://github.com/user-attachments/assets/f85bb57f-e48e-4810-8f2d-9d7575086374" />
 
-**Add feebacks**
+
+
+**Add feeback page**
 
 <img width="350" height="720" alt="" src="https://github.com/user-attachments/assets/c782b02b-d709-4aeb-a902-8e4d32d7462e" />
 
-**Profile Edit**
+
+
+**Profile Edit page**
 
 <img width="350" height="720" alt="" src="https://github.com/user-attachments/assets/f000ae99-46ef-4d20-be8b-777eb81f9abd" />
+
 
 
 ## 🎥 Video Tutorial
 
 https://github.com/user-attachments/assets/e9ffec4b-1b62-4b39-a384-828a8f71a694
+
+
+---
+
+# WARNNING!
+
+## App might not be fully optimized according to industry standards. It is an inividual effort.
+

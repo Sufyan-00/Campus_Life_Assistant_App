@@ -157,8 +157,8 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                                             const AlignmentDirectional(0.0, 0.0),
                                         children: [
                                           Align(
-                                            alignment:
-                                                const AlignmentDirectional(-0.9, 1.0),
+                                            alignment: const AlignmentDirectional(
+                                                -0.01, 1.11),
                                             child: Padding(
                                               padding: const EdgeInsets.all(4.0),
                                               child: Text(
@@ -175,6 +175,7 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primary,
+                                                      fontSize: 14.0,
                                                       letterSpacing: 0.0,
                                                     ),
                                               ),
@@ -293,13 +294,13 @@ class _ClassscheduleWidgetState extends State<ClassscheduleWidget> {
                                           ),
                                           Align(
                                             alignment: const AlignmentDirectional(
-                                                -0.92, 0.36),
+                                                -0.88, 0.41),
                                             child: Padding(
                                               padding: const EdgeInsets.all(4.0),
                                               child: Text(
                                                 valueOrDefault<String>(
                                                   dateTimeFormat(
-                                                      "jm",
+                                                      "EEE, MMM d - h:mm a",
                                                       columnClasscolRecord
                                                           .date),
                                                   'Time',

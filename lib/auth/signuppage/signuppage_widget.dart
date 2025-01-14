@@ -563,7 +563,8 @@ class _SignuppageWidgetState extends State<SignuppageWidget>
                               await UserRecord.collection
                                   .doc(user.uid)
                                   .update(createUserRecordData(
-                                    email: _model.signupNameTextController.text,
+                                    email: _model
+                                        .signupEmailAddressTextController.text,
                                     password: _model
                                         .signupPasswordTextController.text,
                                     displayName:

@@ -1,4 +1,4 @@
-# 🏫 Campus Life Assistant App
+# Campus Life Assistant App
 
 **Campus Life Assistant App** is a comprehensive mobile application designed to help students manage their schedules, assignments,and feedback collection seamlessly. The app is developed using **FlutterFlow** and **Firebase**.
 
@@ -7,7 +7,7 @@
 
 ---
 
-## 📚 Features Overview
+## Features Overview
 
 ### 1. **User Authentication**
 - Firebase Authentication for secure sign-up, login, and profile management.
@@ -44,7 +44,7 @@
 
 ---
 
-## 🚀 Setup and Installation
+## Setup and Installation
 
 ### Prerequisites
 1. Install [Flutter](https://flutter.dev/docs/get-started/install).
@@ -55,7 +55,7 @@
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 **HomePage**
 
@@ -117,7 +117,7 @@
 
 
 
-## 🎥 Video Tutorial
+## Video Tutorial
 
 https://github.com/user-attachments/assets/e9ffec4b-1b62-4b39-a384-828a8f71a694
 
